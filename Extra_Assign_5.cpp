@@ -4,16 +4,16 @@ using namespace std;
 class Books 
 {
     string author, title, publisher;
-    float price;
+    int price;
     int stock;
 
     public:
-    Books(string a, string t, string p, float pr, int s) 
+    Books(string a, string t, string p, int pri, int s) 
     {
         author = a;
         title = t;
         publisher = p;
-        price = pr;
+        price = pri;
         stock = s;
     }
 
@@ -40,7 +40,7 @@ class Books
 
             else 
             {
-                cout << "Required copies not in stock." << endl;
+                cout << "Required Book / number of copies not available." << endl;
                 return true;
             }
         } 
@@ -54,41 +54,37 @@ class Books
 
 int main() 
 {
-    
-    vector<Books> inventory = 
-    {
-        Books("Ansh", "English", "Self", 10.5, 5),
-        Books("Author2", "Title2", "Publisher2", 15.0, 3),
-        Books("Author3", "Title3", "Publisher3", 20.0, 2)
-    };
+    Books book1("Ansh", "English", "Self", 10.5, 5);
+    Books book2("Author2", "Title2", "Publisher2", 15.0, 3);
+    Books book3("Author3", "Title3", "Publisher3", 20.0, 2);
 
-    string searchTitle, searchAuthor;
+    string title, author;
     int copies;
 
     cout<<"Enter the title of the book: ";
-    getline(cin, searchTitle);
+    getline(cin, title);
 
     cout<<"Enter the author of the book: ";
-    getline(cin, searchAuthor);
+    getline(cin, author);
 
     cout<<"Enter the number of copies required: ";
     cin>>copies;
 
     bool found = false;
     
-    for (auto& book : inventory) 
-    {
-        if (book.purchaseBook(searchTitle, searchAuthor, copies)) 
-        {
-            found = true;
-            break;
-        }
+    if (book1.purchaseBook(title, author, copies)) {
+        found = true;
+    }
+    else if (book2.purchaseBook(title, author, copies)) {
+        found = true;
+    }
+    else if (book3.purchaseBook(title, author, copies)) {
+        found = true;
     }
 
     if (!found) 
     {
         cout << "Book not found in inventory." << endl;
     }
-
     return 0;
 }
